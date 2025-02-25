@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "../supabaseClient";
 import { v4 as uuidv4 } from "uuid";
+import QRCode from 'qrcode';  // إضافة مكتبة QRCode
+
 
 const UploadPage = ({ events, files, setFiles }) => {
   const { t, i18n } = useTranslation();
@@ -48,6 +50,9 @@ const UploadPage = ({ events, files, setFiles }) => {
                 setUploadProgress(((index + 1) / uploadedFiles.length) * 100);
               },
             });
+            window.location.reload();
+
+
           if (error) throw error;
           return {
             event_id: event.id,

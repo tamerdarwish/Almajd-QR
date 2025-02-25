@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import JsBarcode from 'jsbarcode';
+import QRCode from 'qrcode';  // إضافة مكتبة QRCode
 import { jsPDF } from 'jspdf';
 import { Canvg } from 'canvg';
 import { Link } from 'react-router-dom';
@@ -61,29 +61,19 @@ const Admin = ({ events }) => {
   const generateBarcodeAndDownload = async (barcode, eventName) => {
     setIsDownloading(true);
     try {
-      const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const url = `http://localhost:3000/upload/${barcode}`;
-      JsBarcode(svgElement, url, {
-        format: 'CODE128',
-        width: 2,
-        height: 100,
-        displayValue: true,
-      });
-      const serializer = new XMLSerializer();
-      let svgString = serializer.serializeToString(svgElement);
-      svgString = svgString.replace(/xmlns="http:\/\/www\.w3\.org\/2000\/svg"/g, '').replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      const v = await Canvg.from(ctx, svgString);
-      await v.render();
-      const pngDataUrl = canvas.toDataURL('image/png');
+      const url = `${process.env.REACT_APP_FRONTEND_URL}/upload/${barcode}`;
+      
+      // توليد QR كود باستخدام مكتبة qrcode
+      const qrCodeDataUrl = await QRCode.toDataURL(url);
+      
+      // إنشاء ملف PDF وحفظه
       const pdf = new jsPDF();
       pdf.text(`اسم المناسبة: ${eventName}`, 10, 10);
-      pdf.addImage(pngDataUrl, 'PNG', 50, 20, 100, 50);
-      pdf.save(`${eventName}-barcode.pdf`);
+      pdf.addImage(qrCodeDataUrl, 'PNG', 50, 20, 100, 100);  // إضافة صورة QR كود
+      pdf.save(`${eventName}-qrcode.pdf`);
     } catch (error) {
-      console.error('حدث خطأ أثناء تحميل الباركود:', error.message);
-      alert('حدث خطأ أثناء تحميل الباركود!');
+      console.error('حدث خطأ أثناء تحميل QR كود:', error.message);
+      alert('حدث خطأ أثناء تحميل QR كود!');
     } finally {
       setIsDownloading(false);
     }
