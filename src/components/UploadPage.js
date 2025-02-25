@@ -50,7 +50,6 @@ const UploadPage = ({ events, files, setFiles }) => {
                 setUploadProgress(((index + 1) / uploadedFiles.length) * 100);
               },
             });
-            window.location.reload();
 
 
           if (error) throw error;
@@ -71,6 +70,8 @@ const UploadPage = ({ events, files, setFiles }) => {
 
       setFiles((prevFiles) => [...prevFiles, ...uploadedFileRecords]);
       alert(t("uploadSuccess"));
+      window.location.reload();
+
     } catch (error) {
       console.error("حدث خطأ أثناء رفع الملفات:", error.message);
       alert(`${t("uploadError")}: ${error.message}`);
