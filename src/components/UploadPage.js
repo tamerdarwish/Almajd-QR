@@ -1,24 +1,23 @@
-import React, { useState } from "react";
+import React,{useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  Box,
-  Typography,
-  Button,
-  Alert,
-  CircularProgress,
-} from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { supabase } from "../supabaseClient";
 import { v4 as uuidv4 } from "uuid";
 
 const UploadPage = ({ events, files, setFiles }) => {
+  const { t, i18n } = useTranslation();
   const { barcode } = useParams();
   const navigate = useNavigate();
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
 
-  const event = events.find((e) => e.barcode === barcode);
+  // تغيير اللغة
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
 
+  const event = events.find((e) => e.barcode === barcode);
   if (!event) {
     navigate("/not-found");
     return null;
@@ -32,10 +31,9 @@ const UploadPage = ({ events, files, setFiles }) => {
   const handleUpload = async () => {
     try {
       if (uploadedFiles.length === 0) {
-        alert("يرجى اختيار ملفات لرفعها!");
+        alert(t("selectFiles"));
         return;
       }
-
       setLoading(true);
 
       // رفع كل ملف إلى Supabase Storage مع تحديث تقدم الرفع
@@ -43,7 +41,6 @@ const UploadPage = ({ events, files, setFiles }) => {
         uploadedFiles.map(async (file, index) => {
           const uniqueFileName = `${uuidv4()}-${file.name}`;
           const filePath = `${event.id}/${uniqueFileName}`;
-
           const { data, error } = await supabase.storage
             .from("wedding-album")
             .upload(filePath, file, {
@@ -51,9 +48,7 @@ const UploadPage = ({ events, files, setFiles }) => {
                 setUploadProgress(((index + 1) / uploadedFiles.length) * 100);
               },
             });
-
           if (error) throw error;
-
           return {
             event_id: event.id,
             file_name: file.name,
@@ -67,14 +62,13 @@ const UploadPage = ({ events, files, setFiles }) => {
       const { data: insertData, error: insertError } = await supabase
         .from("files")
         .insert(uploadedFileRecords);
-
       if (insertError) throw insertError;
 
       setFiles((prevFiles) => [...prevFiles, ...uploadedFileRecords]);
-      alert("تم رفع الملفات بنجاح!");
+      alert(t("uploadSuccess"));
     } catch (error) {
       console.error("حدث خطأ أثناء رفع الملفات:", error.message);
-      alert(`حدث خطأ أثناء رفع الملفات: ${error.message}`);
+      alert(`${t("uploadError")}: ${error.message}`);
     } finally {
       setLoading(false);
       setUploadProgress(0);
@@ -92,67 +86,82 @@ const UploadPage = ({ events, files, setFiles }) => {
             className="w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-lg"
           />
           <h1 className="text-2xl sm:text-4xl font-bold text-[#3ab9f1] text-shadow-lg">
-مشاركة الصور والفيديوهات          </h1>
+            {t("sharePhotosVideos")}
+          </h1>
+        </div>
+
+        {/* Language Switcher */}
+        <div className="relative">
+          <button
+            className="px-4 py-2 bg-gradient-to-r from-[#3ab9f1] to-[#1e90ff] text-white rounded-lg shadow-md hover:shadow-lg transition-shadow text-sm sm:text-lg"
+            onClick={() => document.getElementById('language-menu').classList.toggle('hidden')}
+          >
+            {i18n.language === 'ar' ? 'العربية' : 'עברית'}
+          </button>
+
+          {/* Dropdown Menu */}
+          <div
+            id="language-menu"
+            className="absolute top-full right-0 mt-2 w-32 bg-[#2b2f38] rounded-lg shadow-lg hidden"
+          >
+            <button
+              onClick={() => changeLanguage('ar')}
+              className="block w-full text-right px-4 py-2 text-gray-300 hover:bg-[#3ab9f1] hover:text-white rounded-t-lg transition-colors"
+            >
+              العربية
+            </button>
+            <button
+              onClick={() => changeLanguage('he')}
+              className="block w-full text-right px-4 py-2 text-gray-300 hover:bg-[#3ab9f1] hover:text-white rounded-b-lg transition-colors"
+            >
+              עברית
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Upload Section */}
       <section className="max-w-5xl mx-auto my-8 sm:my-16 p-6 sm:p-8 bg-[#2b2f38] rounded-lg shadow-lg backdrop-blur-md">
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#3ab9f1] mb-6 sm:mb-8">
-          حفل {event.name}
+          {t("event", { name: event.name })}
         </h2>
-
         <h5 className="text-xl sm:text-2xl font-bold text-center text-[#3ab9f1] mb-6 sm:mb-8">
-          شاركونا لحظاتنا الحلوة في الحفل
+          {t("shareMoments")}
         </h5>
-
         <input
           type="file"
           multiple
           onChange={handleFileChange}
           className="block mx-auto mb-4 p-2 rounded-lg bg-[#23272e] text-white"
         />
-
         {loading && (
-          <Box className="flex justify-center mt-4">
-            <CircularProgress color="primary" />
-            <Typography variant="body2" className="text-white ml-2">
-              جاري رفع الملفات...
-            </Typography>
-          </Box>
-        )}
-
-        {!loading && (
-          <div className="flex justify-center mb-6">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleUpload}
-              sx={{ mt: 3 }}
-              className="px-6 py-3 bg-gradient-to-r from-[#3ab9f1] to-[#0072f5] text-white rounded-lg shadow-md hover:shadow-lg"
-            >
-              مشاركة{" "}
-            </Button>
+          <div className="flex justify-center mt-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#3ab9f1]"></div>
+            <p className="text-white ml-2">{t("uploading")}</p>
           </div>
         )}
-
-        {uploadProgress > 0 && !loading && (
-          <Alert
-            severity="info"
-            sx={{ mt: 3 }}
-            className="bg-[#1e2024] text-white"
-          >
-            تم رفع {uploadProgress}% من الملفات.
-          </Alert>
+        {!loading && (
+          <div className="flex justify-center mb-6">
+            <button
+              onClick={handleUpload}
+              className="px-6 py-3 bg-gradient-to-r from-[#3ab9f1] to-[#0072f5] text-white rounded-lg shadow-md hover:shadow-lg"
+            >
+              {t("share")}
+            </button>
+          </div>
         )}
-
-        <Alert
-          severity="info"
-          sx={{ mt: 3 }}
-          className="bg-[#1e2024] text-white"
+        {uploadProgress > 0 && !loading && (
+          <div
+            className="bg-[#1e2024] text-white p-4 rounded-lg mt-3"
+          >
+            {t("uploadProgress", { progress: uploadProgress })}
+          </div>
+        )}
+        <div
+          className="bg-[#1e2024] text-white p-4 rounded-lg mt-3"
         >
-          شكراً لك على المشاركة! ستكون هذه ذكرى جميلة للعروسين  .
-        </Alert>
+          {t("thankYou")}
+        </div>
       </section>
     </div>
   );

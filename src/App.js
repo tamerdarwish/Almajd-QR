@@ -4,15 +4,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UploadPage from './components/UploadPage';
 import Admin from './components/Admin';
 import Album from './components/Album';
-import AdminAlbum from './components/AdminAlbum'; // استيراد الصفحة الجديدة
+import AdminAlbum from './components/AdminAlbum';
 import NotFound from './components/NotFound';
-import LoginPage from './components/LoginPage'; // استيراد صفحة تسجيل الدخول
+import LoginPage from './components/LoginPage';
 import './App.css';
 import { supabase } from './supabaseClient';
+import { useTranslation } from "react-i18next";
 
 function App() {
   const [events, setEvents] = useState([]);
   const [files, setFiles] = useState([]);
+  const { i18n } = useTranslation();
 
   // جلب البيانات عند تشغيل التطبيق
   useEffect(() => {
@@ -23,7 +25,6 @@ function App() {
           .select('*');
         if (eventsError) throw eventsError;
         setEvents(eventsData);
-
         const { data: filesData, error: filesError } = await supabase
           .from('files')
           .select('*');
@@ -33,27 +34,28 @@ function App() {
         console.error('حدث خطأ أثناء جلب البيانات:', error.message);
       }
     };
-
     fetchData();
   }, []);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} /> {/* صفحة تسجيل الدخول */}
-        <Route path="/admin" element={<Admin events={events} />} />
-        <Route
-          path="/upload/:barcode"
-          element={<UploadPage events={events} files={files} setFiles={setFiles} />}
-        />
-        <Route path="/album" element={<Album events={events} files={files} />} />
-        <Route
-          path="/admin-album/:eventId"
-          element={<AdminAlbum files={files} setFiles={setFiles} />}
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <div className={`app ${i18n.language === 'ar' ? 'lang-ar' : 'lang-he'}`}>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin" element={<Admin events={events} />} />
+          <Route
+            path="/upload/:barcode"
+            element={<UploadPage events={events} files={files} setFiles={setFiles} />}
+          />
+          <Route path="/album" element={<Album events={events} files={files} />} />
+          <Route
+            path="/admin-album/:eventId"
+            element={<AdminAlbum files={files} setFiles={setFiles} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

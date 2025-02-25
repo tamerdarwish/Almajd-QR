@@ -1,10 +1,19 @@
 {
-    "login": "כניסה",
-    "email": "אימייל",
-    "password": "סיסמה",
-    "submit": "שלח",
-    "notFound": "404 - הדף לא נמצא!",
+    "sharePhotosVideos": "שיתוף תמונות וסרטונים",
+    "event": "אירוע {{name}}",
+    "shareMoments": "הצטרפו אלינו לחלוק את הרגעים המתוקים מהאירוע",
+    "selectFiles": "אנא בחר קבצים להעלאה!",
+    "uploadSuccess": "הקבצים הועלו בהצלחה!",
+    "uploadError": "אירעה שגיאה בעת העלאת הקבצים",
+    "uploading": "מעלה קבצים...",
+    "uploadProgress": "הועלה {{progress}}% מהקבצים.",
+    "share": "שתף",
+    "thankYou": "תודה לך על השתתפותך! זה יהיה זיכרון יפה לזוג.",
+
     "album": "אלבום האירוע",
-    "accessCode": "הזן קוד גישה",
-    "enter": "כניסה"
+    "viewAlbum": "הצג אלבום",
+    "enterAccessCode": "הזן קוד גישה",
+    "submit": "כניסה",
+    "invalidCode": "קוד הגישה שגוי!",
+    "eventAlbum": "אלבום אירוע: {{name}}"
   }

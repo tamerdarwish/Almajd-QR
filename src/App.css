@@ -1,9 +1,17 @@
-* {
-    font-family: 'Tajawal', sans-serif;
-  }
+
 
   h5 {
     font-family: "Aref Ruqaa", serif;
-    font-weight: 400;
-    font-style: normal;
+
   }
+
+/* الخط العربي الافتراضي */
+*, body, input {
+  font-family: 'Tajawal', sans-serif; /* الخط العربي */
+}
+
+/* الخط العبري */
+.lang-he, .lang-he h5, .lang-he h1, .lang-he input, .lang-he button, .lang-he div, .lang-he h1{
+  font-family: "Heebo", serif;
+}
+
