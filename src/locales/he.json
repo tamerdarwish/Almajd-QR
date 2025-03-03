@@ -45,5 +45,30 @@
   "email": "כתובת אימייל",
   "password": "סיסמה",
   "loginSuccess": "התחברות בוצעה בהצלחה!",
-  "loginError": "אירעה שגיאה בעת התחברות."
+  "loginError": "אירעה שגיאה בעת התחברות.",
+
+
+
+  "album": "אלבום האירוע",
+  "eventAlbum": "אלבום האירוע",
+  "delete": "מחק",
+  "loading": "טוען...",
+  "invalidFileLink": "קישור הקובץ לא תקין!",
+  "deleteBucketError": "אירעה שגיאה בעת מחיקת הקובץ מה-Bucket",
+  "deleteDBError": "אירעה שגיאה בעת מחיקת נתוני הקובץ",
+  "fileDeletedSuccess": "הקובץ נמחק בהצלחה!",
+  "deleteError": "אירעה שגיאה בעת מחיקת הקובץ",
+  "unsupportedVideo": "הדפדפן שלך אינו תומך בשידור וידאו.",
+
+
+  "footerCopyright": "כל הזכויות שמורות למפעל ההדפסה אל-מג'ד.",
+  "developedBy": "פותח על ידי:",
+  "contactUs": "צור קשר",
+
+
+
+  "appName": "אל-מג'ד",
+  "pageNotFound": " !הדף לא נמצא ",
+  "lostYourWay": "נראה שטעית בדרך. אנא בדוק את הקישור שהזנת.",
+  "backToHome": "חזרה לדף הבית"
   }

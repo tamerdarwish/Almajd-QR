@@ -10,6 +10,8 @@ import LoginPage from './components/LoginPage';
 import './App.css';
 import { supabase } from './supabaseClient';
 import { useTranslation } from "react-i18next";
+import Footer from './components/Footer'; // استيراد الفوتر
+
 
 function App() {
   const [events, setEvents] = useState([]);
@@ -41,7 +43,8 @@ function App() {
     <div className={`app ${i18n.language === 'ar' ? 'lang-ar' : 'lang-he'}`}>
       <Router>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<Album events={events} files={files} />} />
+        <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<Admin events={events} />} />
           <Route
             path="/upload/:barcode"
@@ -55,6 +58,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+      <Footer />
+
     </div>
   );
 }

@@ -45,23 +45,31 @@ const Admin = ({ events }) => {
   }
 
   const handleCreateEvent = async () => {
-    if (!eventName.trim()) {
-      setErrorMessage(t('enterEventName'));
+    if (!eventName.trim() || eventName.length < 3) {
+      setErrorMessage(t('eventNameTooShort'));
       return;
     }
+  
     try {
       const barcode = Math.random().toString(36).substr(2, 9);
       const accessCode = Math.random().toString(36).substr(2, 6);
+  
       const { data, error } = await supabase
         .from('events')
         .insert([{ name: eventName, barcode: barcode, access_code: accessCode }]);
-      if (error) throw error;
-      alert(t('eventCreated'));
+  
+      if (error) {
+        console.error('حدث خطأ أثناء إنشاء المناسبة:', error.message);
+        setErrorMessage(t('eventCreationError'));
+        return;
+      }
+  
+      alert(t('eventCreated')); // أو استخدم مكتبة لإظهار الرسائل
       setEventName('');
       setErrorMessage('');
     } catch (error) {
       console.error('حدث خطأ أثناء إنشاء المناسبة:', error.message);
-      alert(t('eventCreationError'));
+      setErrorMessage(t('eventCreationError'));
     }
   };
 
