@@ -15,5 +15,9 @@
     "enterAccessCode": "הזן קוד גישה",
     "submit": "כניסה",
     "invalidCode": "קוד הגישה שגוי!",
-    "eventAlbum": "אלבום אירוע: {{name}}"
+    "eventAlbum": "אלבום אירוע: {{name}}",
+    "downloadSelected": "הורד קבצים נבחרים",
+    "noFilesSelected": "לא נבחרו קבצים!",
+    "selectAll": "בחר הכל",
+    "deselectAll": "בטל בחירה"
   }

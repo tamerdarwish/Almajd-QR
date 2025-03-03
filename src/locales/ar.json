@@ -11,9 +11,13 @@
     "thankYou": "شكراً لك على المشاركة! ستكون هذه ذكرى جميلة للعروسين.",
 
     "album": "ألبوم المناسبة",
-  "viewAlbum": "عرض الألبوم",
-  "enterAccessCode": "أدخل كود الوصول",
-  "submit": "دخول",
-  "invalidCode": "كود الوصول غير صحيح!",
-  "eventAlbum": "ألبوم مناسبة: {{name}}"
+    "viewAlbum": "عرض الألبوم",
+    "enterAccessCode": "أدخل كود الوصول",
+    "submit": "دخول",
+    "invalidCode": "كود الوصول غير صحيح!",
+    "eventAlbum": "ألبوم مناسبة: {{name}}",
+    "downloadSelected": "تحميل الملفات المحددة",
+    "noFilesSelected": "لم يتم تحديد أي ملفات!",
+    "selectAll": "تحديد الكل",
+    "deselectAll": "إلغاء التحديد"
   }
