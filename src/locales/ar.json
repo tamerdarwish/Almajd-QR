@@ -19,5 +19,31 @@
     "downloadSelected": "تحميل الملفات المحددة",
     "noFilesSelected": "لم يتم تحديد أي ملفات!",
     "selectAll": "تحديد الكل",
-    "deselectAll": "إلغاء التحديد"
+    "deselectAll": "إلغاء التحديد",
+
+
+    "loading": "جارٍ التحميل...",
+    "logout": "تسجيل الخروج",
+    "adminDashboard": "لوحة إدارة المناسبات",
+    "createNewEvent": "إنشاء مناسبة جديدة",
+    "enterEventName": "أدخل اسم المناسبة",
+    "create": "إنشاء",
+    "eventCreated": "تم إنشاء المناسبة بنجاح!",
+    "eventCreationError": "حدث خطأ أثناء إنشاء المناسبة!",
+    "eventName": "اسم المناسبة",
+    "barcode": "باركود",
+    "accessCode": "كود الوصول",
+    "currentEvents": "المناسبات الحالية",
+    "searchEvent": "ابحث عن مناسبة...",
+    "viewAlbum": "عرض الألبوم",
+    "downloadBarcode": "تحميل الباركود",
+    "qrCodeDownloadError": "حدث خطأ أثناء تحميل QR كود!",
+
+
+    "login": "تسجيل الدخول",
+    "adminLogin": "تسجيل دخول الإداريين",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "loginSuccess": "تم تسجيل الدخول بنجاح!",
+    "loginError": "حدث خطأ أثناء تسجيل الدخول."
   }

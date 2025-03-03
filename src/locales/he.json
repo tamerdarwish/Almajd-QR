@@ -19,5 +19,31 @@
     "downloadSelected": "הורד קבצים נבחרים",
     "noFilesSelected": "לא נבחרו קבצים!",
     "selectAll": "בחר הכל",
-    "deselectAll": "בטל בחירה"
+    "deselectAll": "בטל בחירה",
+
+
+    "loading": "טוען...",
+    "logout": "התנתקות",
+    "adminDashboard": "לוח ניהול אירועים",
+    "createNewEvent": "יצירת אירוע חדש",
+    "enterEventName": "הזן שם אירוע",
+    "create": "יצירה",
+    "eventCreated": "האירוע נוצר בהצלחה!",
+    "eventCreationError": "אירעה שגיאה בעת יצירת האירוע!",
+    "eventName": "שם האירוע",
+    "barcode": "ברקוד",
+    "accessCode": "קוד גישה",
+    "currentEvents": "האירועים הנוכחיים",
+    "searchEvent": "חפש אירוע...",
+    "viewAlbum": "צפה באלבום",
+    "downloadBarcode": "הורד ברקוד",
+    "qrCodeDownloadError": "אירעה שגיאה בעת הורדת קוד QR!",
+
+
+    "login": "התחברות",
+  "adminLogin": "כניסת מנהלים",
+  "email": "כתובת אימייל",
+  "password": "סיסמה",
+  "loginSuccess": "התחברות בוצעה בהצלחה!",
+  "loginError": "אירעה שגיאה בעת התחברות."
   }

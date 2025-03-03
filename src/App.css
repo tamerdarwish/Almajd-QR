@@ -1,17 +1,31 @@
-
-
-  h5 {
-    font-family: "Aref Ruqaa", serif;
-
-  }
-
-/* الخط العربي الافتراضي */
-*, body, input {
-  font-family: 'Tajawal', sans-serif; /* الخط العربي */
+/* تطبيق الخط العربي على جميع العناصر يدويًا */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+button,
+input,
+select,
+textarea,
+a {
+  font-family: 'Tajawal', sans-serif !important;
 }
 
-/* الخط العبري */
-.lang-he, .lang-he h5, .lang-he h1, .lang-he input, .lang-he button, .lang-he div, .lang-he h1{
-  font-family: "Heebo", serif;
+/* تطبيق الخط العبري عند اختيار اللغة العبرية */
+.lang-he body,
+.lang-he h1,
+.lang-he h2,
+.lang-he h3,
+.lang-he h4,
+.lang-he h5,
+.lang-he p,
+.lang-he button,
+.lang-he input,
+.lang-he select,
+.lang-he textarea,
+.lang-he a {
+  font-family: 'Heebo', serif !important;
 }
-
