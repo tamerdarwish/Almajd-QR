@@ -22,15 +22,15 @@ Almajd-QR is a web application designed to generate and manage QR codes for the 
    ```bash
    git clone https://github.com/tamerdarwish/Almajd-QR.git
    cd Almajd-QR
-2.Install dependencies:
+2. Install dependencies:
 
    ```bash
-  npm install
+     npm install
 
 3. Run the app locally:
 
    ```bash
-  npm start
+     npm start
 
 The app will be running on http://localhost:3000.
 
